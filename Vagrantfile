@@ -16,11 +16,11 @@ Vagrant.configure("2") do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network :forwarded_port, guest: 80, host: 8080
+  config.vm.network :forwarded_port, guest: 80, host: 8080
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network :public_network
+  # config.vm.network :private_network, ip: "192.168.42.1"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -74,6 +74,17 @@ Vagrant.configure("2") do |config|
     puppet.manifests_path   = "puppet/manifests"
     puppet.module_path      = "puppet/modules"
     puppet.manifest_file    = "init.pp"
+
+    # Some vars
+    puppet.facter = {
+        "vagrant"       => "1",
+        "hostname"      => "super-cool.com",
+        "db_user"       => "magento",
+        "db_password"   => "magento",
+        "db_name"       => "magento",
+        "document_root" => "/var/www/magento",
+        "logs_dir"      => "/var/www/logs",
+    }
   end
 
   # Enable provisioning with chef solo, specifying a cookbooks path, roles
