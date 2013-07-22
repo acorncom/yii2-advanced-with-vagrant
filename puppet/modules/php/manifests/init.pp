@@ -1,11 +1,9 @@
 class php () {
 
-    include apache
-
     # Install package
     package { "php5":
         ensure  => latest,
-        require => [ Class['server'], Class['apache'] ],
+        require => [ Class['server'], Package['apache2'] ],
     }
 
     # Install modules
@@ -20,7 +18,7 @@ class php () {
     ]
     package { $modules :
         ensure  => latest,
-        require => [ Class['server'], Class['apache'], Class['mysql'] ],
+        require => [ Package['php5'], Class['server'], Package['apache2'], Package['mysql-server'] ],
     }
 
 }

@@ -3,12 +3,11 @@ class apache::install ( $server_name, $document_root, $logs_dir ) {
     # Install the package
     package { "apache2":
         ensure  => latest,
-        before  => File['/etc/apache2/sites-available/magento'],
         require => Class['server'],
     }
 
     # The virtualhost file
-    file { "site-magento":
+    -> file { "site-magento":
         path    => "/etc/apache2/sites-available/magento",
         ensure  => present,
         content => template("apache/magento.vhost"),
