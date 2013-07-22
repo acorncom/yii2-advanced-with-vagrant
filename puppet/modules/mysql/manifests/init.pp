@@ -25,6 +25,7 @@ class mysql ( $root_password, $db_name, $db_user, $db_password ) {
         path        => "/usr/bin",
         unless      => "mysqladmin -uroot -p${root_password} status",
         command     => "mysqladmin -uroot password ${root_password}",
+        require     => Service['mysql'],
     }
 
     # Create the magento database
