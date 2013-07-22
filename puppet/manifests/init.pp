@@ -41,4 +41,4 @@ class { "php":
 include server
 include apache
 include mysql
-# include php5
+include php
