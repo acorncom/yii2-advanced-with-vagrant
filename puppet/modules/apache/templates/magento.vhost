@@ -1,0 +1,20 @@
+<VirtualHost *:80>
+
+    ServerName <%= server_name %>
+
+    DocumentRoot <%= document_root %>
+
+    ErrorLog <%= logs_dir %>/apache-error.log
+    CustomLog <%= logs_dir %>/apache-access.log common
+    #php_value error_log /path/php.log
+
+    <Directory <%= document_root %>>
+        Order allow,deny
+        Allow from all
+        AllowOverride All
+        Options all
+    </Directory>
+
+    SetEnv MAGE_IS_DEVELOPER_MODE 1
+
+</VirtualHost>
