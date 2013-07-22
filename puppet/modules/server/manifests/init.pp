@@ -5,10 +5,4 @@ class server ( $hostname ) {
         command => "apt-get update",
     }
 
-    file { "set the hostname":
-        ensure  => file,
-        path    => "/etc/hostname",
-        content => $hostname,
-    }
-
 }
