@@ -9,7 +9,7 @@ Exec {
         '/bin',
         '/sbin'
     ],
-    logoutput => true,
+    logoutput => false,
 }
 
 # The server
