@@ -42,3 +42,4 @@ include server
 include apache
 include mysql
 include php
+include git
