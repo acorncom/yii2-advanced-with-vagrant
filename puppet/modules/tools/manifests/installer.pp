@@ -2,10 +2,11 @@ class tools::installer {
 
     $repo_path = '/usr/local/src/Installer'
     $binary = '/usr/local/bin/Installer'
+    $url = 'https://github.com/jacquesbh/Installer.git'
 
     exec { "clone jacquesbh/Installer":
         creates => $repo_path,
-        command => "git clone https://github.com/jacquesbh/Installer.git $repo_path",
+        command => "git clone $url $repo_path",
         require => Package['git'],
     }
 
