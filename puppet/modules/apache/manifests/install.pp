@@ -1,9 +1,25 @@
 class apache::install ( $server_name, $document_root, $logs_dir ) {
 
+    Exec {
+        path => [
+            '/usr/local/bin',
+            '/opt/local/bin',
+            '/usr/bin',
+            '/usr/sbin',
+            '/bin',
+            '/sbin'
+        ],
+    }
+
     # Install the package
     package { "apache2":
         ensure  => latest,
         require => Class['server'],
+    }
+
+    # The shell of www-data
+    -> exec { 'change www-data shell':
+        command => 'chsh -s /bin/bash www-data'
     }
 
     # The virtualhost file
@@ -38,5 +54,11 @@ class apache::install ( $server_name, $document_root, $logs_dir ) {
         ensure  => directory,
         path    => $logs_dir,
     }
+
+    # Mods
+    exec { 'enable mod rewrite':
+        command => 'a2enmod rewrite',
+        require => Package['apache2'],
+    } ~> Service['apache2']
 
 }

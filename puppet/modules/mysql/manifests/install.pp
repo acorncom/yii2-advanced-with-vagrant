@@ -17,6 +17,7 @@ class mysql::install ( $root_password, $db_name, $db_user, $db_password ) {
         command     => "mysqladmin -uroot password ${root_password}",
         require     => [ Package['mysql-client'], Service['mysql'], Package['mysql-server'] ],
     }
+    ~> notify { "The MySQL root password is: ${root_password}": }
 
     # Create the magento database
     exec { "create-magento-db":
