@@ -1,0 +1,68 @@
+#  lord of the screen : 
+#      use ctrl z  instead of ctrl a
+escape ^zz
+
+hardstatus alwayslastline
+hardstatus string '%{=kW}[%h][%=%{=kw}%?%-Lw%{r}%f%t%{w}%u%{w}%+Lw%?%=][ %{B}%l% %d/%m/%Y %{W}%c ]'
+
+# Tips on http://blogs.techrepublic.com.com/opensource/?p=124# -------------------------------------------------------------------
+#  General config
+# -------------------------------------------------------------------
+#deflogin on
+altscreen on
+activity "active: %n (%t) [%w:%s]"
+activity 'Activity on screen %n ^G'
+nonblock on
+
+# Stop this annoying message
+startup_message off
+# Detach on hangup
+autodetach on
+# Go to home dir
+chdir
+# Shell
+shell -$SHELL
+# History
+defscrollback 4096
+# Stop this stupid bell
+vbell off
+vbell_msg "[[[ ding ]]]"
+# Display messages during 2s
+msgwait 4
+msgminwait 2
+# Use UTF-8 everywhere
+defutf8 on
+
+# -------------------------------------------------------------------
+#  Terms specs
+# -------------------------------------------------------------------
+term "rxvt-unicode"
+termcapinfo xterm*|rxvt* ti@:te@
+termcapinfo xterm*|rxvt* 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007' 
+termcapinfo xterm*|rxvt*|kterm*|Eterm* hs:ts=\E]0;:fs=\007:ds=\E]0;\007
+termcapinfo xterm*|linux*|rxvt*|Eterm* OP
+termcapinfo xterm*|rxvt* hs@:cs=\E[%i%d;%dr:im=\E[4h:ei=\E[4l
+termcapinfo xterm*|rxvt* hs@:cs=\E[%i%p1%d;%p2%dr:im=\E[4h:ei=\E[4l
+termcapinfo xterm*|rxvt* Z0=\E[?3h:Z1=\E[?3l:is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l
+termcapinfo xterm* OL=100
+termcapinfo xterm*|rxvt* 'VR=\E[?5h:VN=\E[?5l'
+termcapinfo xterm*|rxvt* 'k1=\E[11~:k2=\E[12~:k3=\E[13~:k4=\E[14~'
+termcapinfo xterm*|rxvt* 'kh=\EOH:kI=\E[2~:kD=\E[3~:kH=\EOF:kP=\E[5~:kN=\E[6~'
+termcapinfo xterm*|rxvt* 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'
+termcapinfo xterm*|rxvt* 'vi=\E[?25l:ve=\E[34h\E[?25h:vs=\E[34l'
+termcapinfo xterm*|rxvt* 'XC=K%,%\E(B,[\304,\\\\\326,]\334,{\344,|\366,}\374,~\337'
+termcapinfo xterm*|rxvt* be
+termcapinfo xterm*|rxvt* 'so=\E[3m:se=\E[23m'
+
+#caption always "%{=b dw}%{=b dw}[ %h ] [ %= %?%{-b dc}%-Lw%?%{+b dk}(%{+b dw}%n:%t%{+b dk})%?(%u)%?%{-b dw}%?%{-b dc}%+Lw%? %{=b dk}%{=b dw}] [ %{-b dw}Load%{+b dk}: %{-b dc}%l %{=b dw}] [ %{-b dw}%{-b dc}%D %M %d %c:%s %Y%{=b dw} ]" 
+#caption always "%{=b dw}%{=b dw}[ %{-b dc}%h%{=b dw} ] [ %= %?%{-b dc}%-Lw%?%{+b dk}(%{+b dw}%n:%t%{+b dk})%?(%u)%?%{-b dw}%?%{-b dc}%+Lw%? %{=b dk}%{=b dw}] [%{-b dw} %1`%{=b dw} ]" 
+#hardstatus alwayslastline "%{+b d%{+b dw}[%{-b dg} %0C:%s%a %{=b dk}]-[ %{-b dw}Load%{+b dk}:%{-b dg}%l %{+b dk}] %h"
+
+# Status:
+hardstatus alwayslastline '%{= w}%-Lw %{g}%n%f %t%{w}%+Lw'
+
+# Term caption
+#caption always '%{wG}%d-%m-%y %c:%s %H%=%l'
+#caption always "%{=b dw}%{=b dw}[ %h ]%=[ %{-b dw}Load%{+b dk}: %{-b dc}%l %{=b dw}] [ %{-b dw}%{-b dc}%d/%m/%y %c:%s%{=b dw} ]" 
+caption always "%{=b dw}%{=b dw}[ %h ]%=[ %{-b dw}Load%{+b dk}: %{-b dc}%l %{=b dw}] [ %{-b dw}%{-b dc}%d/%m/%y %c%{=b dw} ]"
+

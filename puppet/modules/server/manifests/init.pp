@@ -12,4 +12,12 @@ class server ( $hostname ) {
         require => Exec['update'],
     }
 
+    # ScreenRC
+    file { ".screenrc":
+        ensure  => file,
+        path    => '/root/.screenrc',
+        source  => 'puppet:///modules/server/.screenrc',
+        require => Package['screen'],
+    }
+
 }
