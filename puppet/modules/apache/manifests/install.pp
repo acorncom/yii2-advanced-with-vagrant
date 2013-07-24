@@ -63,4 +63,10 @@ class apache::install ( $server_name, $document_root, $logs_dir ) {
         require => Package['apache2'],
     } ~> Service['apache2']
 
+    exec { 'enable mod ssl':
+        onlyif  => 'test `apache2ctl -M 2> /dev/null | grep ssl | wc -l` -neq 1',
+        command => 'a2enmod ssl',
+        require => Package['apache2'],
+    } ~> Service['apache2']
+
 }
