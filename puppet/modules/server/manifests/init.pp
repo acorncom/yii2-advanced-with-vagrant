@@ -5,4 +5,9 @@ class server ( $hostname ) {
         command => "apt-get update",
     }
 
+    package { "curl":
+        ensure  => latest,
+        require => Exec['update'],
+    }
+
 }
