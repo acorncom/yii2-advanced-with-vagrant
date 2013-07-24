@@ -7,7 +7,5 @@ class apache::service {
         hasstatus   => true,
         require     => Class['apache::install']
     }
-    ~>
-    notify { "Apache reloaded": }
 
 }

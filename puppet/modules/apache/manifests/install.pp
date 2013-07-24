@@ -19,6 +19,7 @@ class apache::install ( $server_name, $document_root, $logs_dir ) {
 
     # The shell of www-data
     -> exec { 'change www-data shell':
+        onlyif  => "test `cat /etc/passwd | grep www-data | awk -F ':' '{ print \$7 }'` != '/bin/bash'",
         command => 'chsh -s /bin/bash www-data'
     }
 
@@ -57,6 +58,7 @@ class apache::install ( $server_name, $document_root, $logs_dir ) {
 
     # Mods
     exec { 'enable mod rewrite':
+        onlyif  => 'test `apache2ctl -M 2> /dev/null | grep rewrite | wc -l` -neq 1',
         command => 'a2enmod rewrite',
         require => Package['apache2'],
     } ~> Service['apache2']
