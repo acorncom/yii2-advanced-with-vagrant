@@ -18,6 +18,7 @@ class tools::installer {
 
     exec { "pull jacquesbh/Installer":
         cwd     => $repo_path,
+        onlyif  => "test `git log -1 | grep commit | awk '{ print \$2 }'` != `git ls-remote $url | grep master | awk '{ print \$1 }'`",
         command => 'git pull',
         require => Exec['clone jacquesbh/Installer'],
     }
