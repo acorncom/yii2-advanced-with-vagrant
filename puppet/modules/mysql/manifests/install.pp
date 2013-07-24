@@ -7,15 +7,30 @@ class mysql::install ( $root_password, $db_name, $db_user, $db_password ) {
     }
 
     -> file { "/etc/mysql/my.cnf":
-        ensure => file,
-        source => "puppet:///modules/mysql/my.cnf",
-        owner  => "root",
-        group  => "root",
-        notify => Service['mysql'],
+        ensure  => file,
+        source  => "puppet:///modules/mysql/my.cnf",
+        owner   => "root",
+        group   => "root",
+        notify  => Exec['remove innodb files'],
+        require => Exec['stop mysql'],
     }
 
     -> package { "mysql-client":
         ensure  => latest,
+    }
+
+    # Stop mysql
+    exec { "stop mysql":
+        refreshonly => true,
+        command     => "service mysql stop"
+    }
+
+
+    # Remove ib files
+    exec { "remove innodb files":
+        refreshonly => true,
+        command     => "rm -rf /var/lib/mysql/ib*",
+        notify      => Service['mysql'],
     }
 
     # Setup the root password
