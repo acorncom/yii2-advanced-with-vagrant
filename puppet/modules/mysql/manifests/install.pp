@@ -6,6 +6,14 @@ class mysql::install ( $root_password, $db_name, $db_user, $db_password ) {
         require => Class['server'],
     }
 
+    -> file { "/etc/mysql/my.cnf":
+        ensure => file,
+        source => "puppet:///modules/mysql/my.cnf",
+        owner  => "root",
+        group  => "root",
+        notify => Service['mysql'],
+    }
+
     -> package { "mysql-client":
         ensure  => latest,
     }
