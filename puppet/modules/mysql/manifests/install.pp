@@ -12,12 +12,11 @@ class mysql::install ( $root_password, $db_name, $db_user, $db_password ) {
 
     # Setup the root password
     exec { "setup the root password":
-        path        => "/usr/bin",
-        unless      => "mysqladmin -uroot -p${root_password} status",
-        command     => "mysqladmin -uroot password ${root_password}",
-        require     => [ Package['mysql-client'], Service['mysql'], Package['mysql-server'] ],
+        path    => "/usr/bin",
+        unless  => "mysqladmin -uroot -p${root_password} status",
+        command => "mysqladmin -uroot password ${root_password}",
+        require => [ Package['mysql-client'], Service['mysql'], Package['mysql-server'] ],
     }
-    ~> notify { "The MySQL root password is: ${root_password}": }
 
     # Create the magento database
     exec { "create-magento-db":
@@ -26,7 +25,7 @@ class mysql::install ( $root_password, $db_name, $db_user, $db_password ) {
         command => "mysqladmin -uroot -p${root_password} create ${db_name}",
         require => Exec['setup the root password'],
     }
-    
+
     # Create the magento user
     exec { "create-magento-user":
         path    => "/usr/bin",

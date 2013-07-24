@@ -7,7 +7,5 @@ class mysql::service {
         hasstatus   => true,
         require     => Package['mysql-server']
     }
-    ~>
-    notify { "MySQL reloaded": }
 
 }
