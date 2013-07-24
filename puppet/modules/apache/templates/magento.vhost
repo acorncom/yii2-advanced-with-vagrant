@@ -17,4 +17,6 @@
 
     SetEnv MAGE_IS_DEVELOPER_MODE 1
 
+    AssignUserId vagrant vagrant
+
 </VirtualHost>

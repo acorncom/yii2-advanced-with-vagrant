@@ -13,6 +13,7 @@ class apache::install ( $server_name, $document_root, $logs_dir ) {
 
     # Install the package
     package { "apache2":
+        name    => "apache2-mpm-itk",
         ensure  => latest,
         require => Class['server'],
     }
@@ -68,5 +69,12 @@ class apache::install ( $server_name, $document_root, $logs_dir ) {
         command => 'a2enmod ssl',
         require => Package['apache2'],
     } ~> Service['apache2']
+
+    # Add www-data to vagrant group
+    exec { "Add www-data to vagrant group":
+        onlyif  => "test `groups www-data | grep vagrant` -eq 0",
+        command => 'usermod -aG vagrant www-data',
+        require => Package['apache2'],
+    }
 
 }
