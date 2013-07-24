@@ -12,7 +12,7 @@ class tools::modman {
 
     -> exec { "chmod modman binary":
         cwd     => "$repo_path",
-        onlyif  => "test `stat --format '%a' modman` -neq 755",
+        onlyif  => "test `stat --format '%a' modman` -ne 755",
         command => "chmod 755 $repo_path/modman",
     }
 
