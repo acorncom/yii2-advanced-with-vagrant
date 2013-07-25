@@ -53,7 +53,7 @@ class mysql::install ( $root_password, $db_name, $db_user, $db_password ) {
     exec { "create-magento-user":
         path    => "/usr/bin",
         unless  => "mysql -u${db_user} -p${db_password} ${db_name}",
-        command => "mysql -uroot -p${root_password} -e \"GRANT ALL ON *.* TO '${db_user}'@'localhost' IDENTIFIED BY '${db_password}' WITH GRANT OPTION;\"",
+        command => "mysql -uroot -p${root_password} -e \"GRANT ALL ON *.* TO '${db_user}'@'%' IDENTIFIED BY '${db_password}' WITH GRANT OPTION;\"",
         require => Exec["create-magento-db"],
     }
 
