@@ -13,6 +13,10 @@ You just need [Vagrant][vagrant] :)
 
 With the information above you can connect to the MySQL server running on the virtual machine.
 
+### Import database
+
+If file exists `database.sql.gz` in the main directory (where the Vagrantfile is), puppet will import the database.
+
 ## Virtualhost
 
 Per default the variable `MAGE_IS_DEVELOPER_MODE` is set to true.
