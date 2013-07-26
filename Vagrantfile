@@ -8,6 +8,7 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "debian-wheezy"
+  config.vm.box_url = "http://boxes.monsieurbiz.com/debian-wheezy.box"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
