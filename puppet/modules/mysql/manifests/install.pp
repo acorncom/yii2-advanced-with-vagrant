@@ -41,6 +41,12 @@ class mysql::install ( $root_password, $db_name, $db_user, $db_password ) {
         require => [ Package['mysql-client'], Service['mysql'], Package['mysql-server'] ],
     }
 
+    # ~/.my.cnf
+    -> file { "/root/.my.cnf":
+        ensure  => present,
+        content => template("mysql/.my.cnf"),
+    }
+
     # Create the magento database
     exec { "create-magento-db":
         path    => "/usr/bin",
