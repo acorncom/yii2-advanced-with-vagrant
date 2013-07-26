@@ -53,6 +53,14 @@ class mysql::install ( $root_password, $db_name, $db_user, $db_password ) {
         unless  => "mysql -uroot -p${root_password} ${db_name}",
         command => "mysqladmin -uroot -p${root_password} create ${db_name}",
         require => Exec['setup the root password'],
+        notify  => Exec['import database'],
+    }
+
+    exec { "import database":
+        refreshonly => true,
+        cwd         => "/vagrant",
+        onlyif      => "test -f database.sql.gz",
+        command     => "gunzip -c database.sql.gz | mysql -uroot -p${root_password} ${db_name}",
     }
 
     # Create the magento user
