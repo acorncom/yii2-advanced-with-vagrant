@@ -26,7 +26,7 @@ class { "apache":
 
 # MySQL
 class { "mysql":
-    root_password   => "mysql",
+    root_password   => "${db_root_password}",
     db_name         => "${db_name}",
     db_user         => "${db_user}",
     db_password     => "${db_password}",

@@ -80,13 +80,14 @@ Vagrant.configure("2") do |config|
 
     # Some vars
     puppet.facter = {
-        "vagrant"       => "1",
-        "hostname"      => "super-cool.com",
-        "db_user"       => "magento",
-        "db_password"   => "magento",
-        "db_name"       => "magento",
-        "document_root" => "/var/www/magento",
-        "logs_dir"      => "/var/www/logs",
+        "vagrant"           => "1",
+        "hostname"          => "super-cool.com",
+        "db_root_password"  => "mysql",
+        "db_user"           => "magento",
+        "db_password"       => "magento",
+        "db_name"           => "magento",
+        "document_root"     => "/var/www/magento",
+        "logs_dir"          => "/var/www/logs",
     }
   end
 
