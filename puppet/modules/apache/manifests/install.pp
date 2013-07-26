@@ -70,6 +70,12 @@ class apache::install ( $server_name, $document_root, $logs_dir ) {
         require => Package['apache2'],
     } ~> Service['apache2']
 
+    exec { 'enable mod headers':
+        onlyif  => 'test `apache2ctl -M 2> /dev/null | grep headers | wc -l` -ne 1',
+        command => 'a2enmod headers',
+        require => Package['apache2'],
+    } ~> Service['apache2']
+
     # Add www-data to vagrant group
     exec { "Add www-data to vagrant group":
         onlyif  => "test `groups www-data | grep vagrant` -eq 0",
