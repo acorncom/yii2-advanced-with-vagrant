@@ -14,7 +14,8 @@ class php () {
         "php5-mysql",
         "php5-curl",
         "php5-intl",
-        "php5-mcrypt"
+        "php5-mcrypt",
+        "php5-tidy",
     ]
     package { $modules :
         ensure  => latest,

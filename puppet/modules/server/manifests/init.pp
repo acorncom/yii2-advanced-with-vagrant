@@ -6,7 +6,7 @@ class server ( $hostname ) {
     }
 
     # Few packages
-    $packages = ["curl", "vim", "screen", "wget"]
+    $packages = ["curl", "vim", "screen", "wget", "tidy"]
     package { $packages:
         ensure  => latest,
         require => Exec['update'],
