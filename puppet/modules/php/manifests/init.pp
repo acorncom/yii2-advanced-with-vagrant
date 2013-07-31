@@ -16,6 +16,7 @@ class php () {
         "php5-intl",
         "php5-mcrypt",
         "php5-tidy",
+        "php5-readline",
     ]
     package { $modules :
         ensure  => latest,
