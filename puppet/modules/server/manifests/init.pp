@@ -1,9 +1,9 @@
 class server ( $hostname ) {
 
-    file { "sources":
+    file { "/etc/apt/sources.list.d/dotdeb.list":
         ensure => file,
-        path   => "/etc/apt/sources.list",
-        source => "puppet:///modules/server/sources.list",
+        path   => "/etc/apt/sources.list.d/dotdeb.list",
+        source => "puppet:///modules/server/dotdeb.list",
         owner  => "root",
         group  => "root",
     }
