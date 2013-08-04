@@ -42,7 +42,7 @@ With the information below you can connect to the MySQL server running on the vi
 
 ### Import database
 
-If file exists `database.sql.gz` in the main directory (where the Vagrantfile is), puppet will import the database.
+If file exists `database.sql.gz` in the main directory (where the Vagrantfile is), puppet will import the database during the first `up`.
 
 ## Virtualhost
 
@@ -93,3 +93,4 @@ Are installed:
 [installer]: https://github.com/jacquesbh/Installer#readme
 [modman]: https://github.com/colinmollenhour/modman
 [magerun]: https://github.com/netz98/n98-magerun
+[mailcatcher]: http://mailcatcher.me
