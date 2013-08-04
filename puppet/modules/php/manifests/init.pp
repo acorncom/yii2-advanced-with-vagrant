@@ -6,6 +6,12 @@ class php () {
         require => [ Class['server'], Package['apache2'], File['/etc/apt/sources.list.d/dotdeb.list'] ],
     }
 
+    -> file { "/etc/php5/apache2/php.ini":
+        ensure => file,
+        source => "puppet:///modules/php/php.ini",
+        notify => Service['apache2'],
+    }
+
     # Install modules
     $modules = [
         "php5-cli",
