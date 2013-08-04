@@ -21,7 +21,7 @@ Now you can access to your Magento : `http://your-domain.org:8080`
 
 If you want do remove the port `8080` and access to your website via `http://your-domain.org/` , you can do it with `ipfw`.  
 Example : `ipfw add 100 fwd 127.0.0.1,8080 tcp from any to me 80` as root  
-*`ipfw` isn't possible on Windows (but Windows sucks right?)
+*`ipfw` isn't possible on Windows (but Windows sucks right?)*
 
 ## MySQL
 
