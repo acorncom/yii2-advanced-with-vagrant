@@ -4,6 +4,10 @@
 
 You just need [Vagrant][vagrant] :)
 
+## How start
+
+...
+
 ## MySQL
 
 * Host: 127.0.0.1
@@ -23,6 +27,22 @@ Per default the variable `MAGE_IS_DEVELOPER_MODE` is set to true.
 
 The virtualhost is set on the `htdocs` directory.
 
+## Mails
+
+[MailCatcher][mailcatcher] is installed and configured into the `/etc/php5/apache2/php.ini` file.
+
+### How it works
+
+If mailcatcher is stopped: all emails are lost.
+
+If mailcatcher is started: **all emails are catched**.
+
+If you want to start MailCatcher, simply run this command (with vagrant user) : `mailcatcher --ip 0.0.0.0`
+
+Then go to : http://localhost:1080
+
+If you need to stop the mailcatcher daemon : Clic on "Quit" on the top right corner of the MailCatcher Web UI.
+
 ## Packages
 
 Are installed:
@@ -37,6 +57,7 @@ Are installed:
 * curl
 * git
 * composer.phar
+* mailcatcher (gem)
 
 ### For Magento developers
 
