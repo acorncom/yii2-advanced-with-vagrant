@@ -25,12 +25,20 @@ Example : `ipfw add 100 fwd 127.0.0.1,8080 tcp from any to me 80` as root
 
 ## MySQL
 
-* Host: 127.0.0.1
-* Port: 3307
-* User: magento
-* Pass: magento
+You need to use an SSH connection.
 
-With the information above you can connect to the MySQL server running on the virtual machine.
+With the information below you can connect to the MySQL server running on the virtual machine.
+
+## Default information
+
+* SSH Host: 10.0.0.2
+* SSH User: vagrant
+* SSH Pass: vagrant
+* SSH Port: 2222 (default by vagrant)
+* MySQL Host: 127.0.0.1
+* MySQL Port: 3306
+* MySQL User: magento
+* MySQL Pass: magento
 
 ### Import database
 
