@@ -6,7 +6,22 @@ You just need [Vagrant][vagrant] :)
 
 ## How start
 
-...
+Edit the `Vagrantfile`: `vim Vagrantfile`
+
+*   Change the VM IP if needed. Default is: `10.0.0.2` (`10.0.0.1` is your machine)
+*   Change the RAM or number of CPUs if needed.
+*   On the puppet part: change the factors
+    *   Change `hostname` with the development domain of your website
+    *   Change `db_*` variables with your information or keep default values
+    *   If you change the `document_root` don't forget to change the synced directory
+
+Then `up` the VM: `vagrant up`
+
+Now you can access to your Magento : `http://your-domain.org:8080`
+
+If you want do remove the port `8080` and access to your website via `http://your-domain.org/` , you can do it with `ipfw`.  
+Example : `ipfw add 100 fwd 127.0.0.1,8080 tcp from any to me 80` as root  
+*`ipfw` isn't possible on Windows (but Windows sucks right?)
 
 ## MySQL
 
