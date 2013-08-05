@@ -11,7 +11,7 @@ class mysql::install ( $root_password, $db_name, $db_user, $db_password ) {
         source  => "puppet:///modules/mysql/my.cnf",
         owner   => "root",
         group   => "root",
-        notify  => Exec['remove innodb files'],
+        notify  => Service['mysql'],
         require => Exec['stop mysql'],
     }
 
@@ -28,7 +28,7 @@ class mysql::install ( $root_password, $db_name, $db_user, $db_password ) {
 
     # Remove ib files
     exec { "remove innodb files":
-        refreshonly => true,
+        onlyif      => "test ! `mysql -uroot -p${root_password} -e 'use ${db_name}' && echo $?`",
         command     => "rm -rf /var/lib/mysql/ib*",
         notify      => Service['mysql'],
     }
@@ -50,7 +50,7 @@ class mysql::install ( $root_password, $db_name, $db_user, $db_password ) {
     # Create the magento database
     exec { "create-magento-db":
         path    => "/usr/bin",
-        unless  => "mysql -uroot -p${root_password} ${db_name}",
+        onlyif  => "test ! `mysql -uroot -p${root_password} -e 'use ${db_name}' && echo $?`",
         command => "mysqladmin -uroot -p${root_password} create ${db_name}",
         require => Exec['setup the root password'],
         notify  => Exec['import database'],
@@ -66,7 +66,7 @@ class mysql::install ( $root_password, $db_name, $db_user, $db_password ) {
     # Create the magento user
     exec { "create-magento-user":
         path    => "/usr/bin",
-        unless  => "mysql -u${db_user} -p${db_password} ${db_name}",
+        onlyif  => "test ! `mysql -uroot -p${root_password} -e 'use ${db_name}' && echo $?`",
         command => "mysql -uroot -p${root_password} -e \"GRANT ALL ON *.* TO '${db_user}'@'localhost' IDENTIFIED BY '${db_password}' WITH GRANT OPTION;\"",
         require => Exec["create-magento-db"],
     }
