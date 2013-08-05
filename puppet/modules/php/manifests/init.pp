@@ -4,12 +4,15 @@ class php () {
     package { "php5":
         ensure  => latest,
         require => [ Class['server'], Package['apache2'], File['/etc/apt/sources.list.d/dotdeb.list'] ],
+        notify  => Service['apache2'],
     }
 
     -> file { "/etc/php5/apache2/php.ini":
         ensure => file,
         source => "puppet:///modules/php/php.ini",
         notify => Service['apache2'],
+        owner  => "root",
+        group  => "root",
     }
 
     # Install modules

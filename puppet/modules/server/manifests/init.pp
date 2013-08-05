@@ -17,7 +17,7 @@ class server ( $hostname ) {
     }
 
     # Few packages
-    $packages = ["curl", "vim", "screen", "wget", "tidy"]
+    $packages = ["curl", "tidy"]
     package { $packages:
         ensure  => latest,
         require => Exec['update'],
@@ -28,7 +28,6 @@ class server ( $hostname ) {
         ensure  => file,
         path    => '/root/.screenrc',
         source  => 'puppet:///modules/server/.screenrc',
-        require => Package['screen'],
     }
 
 }

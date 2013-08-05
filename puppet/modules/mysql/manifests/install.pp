@@ -3,34 +3,30 @@ class mysql::install ( $root_password, $db_name, $db_user, $db_password ) {
     # MySQL server & client
     package { "mysql-server":
         ensure  => latest,
-        require => Class['server'],
-    }
-
-    -> file { "/etc/mysql/my.cnf":
-        ensure  => file,
-        source  => "puppet:///modules/mysql/my.cnf",
-        owner   => "root",
-        group   => "root",
+        require => [ Class['server'], File['/etc/mysql/my.cnf'] ],
         notify  => Service['mysql'],
-        require => Exec['stop mysql'],
     }
 
     -> package { "mysql-client":
         ensure  => latest,
     }
 
+    file { "/etc/mysql":
+        ensure => directory,
+    }
+
+    -> file { "/etc/mysql/my.cnf":
+        ensure => file,
+        source => "puppet:///modules/mysql/my.cnf",
+        owner  => "root",
+        group  => "root",
+        notify => Service['mysql'],
+    }
+
     # Stop mysql
     exec { "stop mysql":
         refreshonly => true,
         command     => "service mysql stop"
-    }
-
-
-    # Remove ib files
-    exec { "remove innodb files":
-        onlyif      => "test ! `mysql -uroot -p${root_password} -e 'use ${db_name}' && echo $?`",
-        command     => "rm -rf /var/lib/mysql/ib*",
-        notify      => Service['mysql'],
     }
 
     # Setup the root password
@@ -66,7 +62,7 @@ class mysql::install ( $root_password, $db_name, $db_user, $db_password ) {
     # Create the magento user
     exec { "create-magento-user":
         path    => "/usr/bin",
-        onlyif  => "test ! `mysql -uroot -p${root_password} -e 'use ${db_name}' && echo $?`",
+        onlyif  => "test ! `mysql -u${db_user} -p${db_password} -e 'use ${db_name}' && echo $?`",
         command => "mysql -uroot -p${root_password} -e \"GRANT ALL ON *.* TO '${db_user}'@'localhost' IDENTIFIED BY '${db_password}' WITH GRANT OPTION;\"",
         require => Exec["create-magento-db"],
     }

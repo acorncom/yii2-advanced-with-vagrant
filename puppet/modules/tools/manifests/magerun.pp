@@ -4,7 +4,7 @@ class tools::magerun {
         cwd     => "/usr/local/bin",
         creates => "/usr/local/bin/n98-magerun.phar",
         command => "wget --no-check-certificate https://raw.github.com/netz98/n98-magerun/master/n98-magerun.phar",
-        require => [ Package['wget'], Package['php5'] ],
+        require => [ Package['php5'] ],
     }
 
     -> exec { "chmod magerun":
