@@ -29,5 +29,10 @@ class server ( $hostname ) {
         path    => '/root/.screenrc',
         source  => 'puppet:///modules/server/.screenrc',
     }
+    file { ".screenrc for vagrant":
+        ensure  => file,
+        path    => '/home/vagrant/.screenrc',
+        source  => 'puppet:///modules/server/.screenrc',
+    }
 
 }
