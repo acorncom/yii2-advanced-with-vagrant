@@ -1,5 +1,9 @@
 class tools::casperjs {
 
+    package { ["libfreetype6", "fontconfig"]:
+        ensure => latest,
+    }
+
     # PhantomJS
     $phantomjs = "phantomjs-1.9.2-linux-x86_64"
     $phantomjs_filename = "${phantomjs}.tar.bz2"
@@ -19,13 +23,14 @@ class tools::casperjs {
         creates => "/usr/local/bin/phantomjs",
         cwd     => "/root",
         command => "cp ${phantomjs}/bin/phantomjs /usr/local/bin && chmod +x /usr/local/bin/phantomjs",
+        require => [ Package["libfreetype6"], Package["fontconfig"] ],
     }
 
     exec { "clone casperjs":
         creates => "/usr/local/src/casperjs",
         cwd     => "/usr/local/src",
         command => "git clone git://github.com/n1k0/casperjs.git casperjs",
-        require => Exec['install phantomjs'],
+        require => [ Exec['install phantomjs'], Class['git'] ],
     }
 
     -> exec { "install casperjs":
