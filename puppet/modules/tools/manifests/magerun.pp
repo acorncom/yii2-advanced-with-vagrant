@@ -9,8 +9,8 @@ class tools::magerun {
 
     -> exec { "chmod magerun":
         cwd     => "/usr/local/bin",
-        onlyif  => "test `stat --format '%a' n98-magerun.phar` -ne 755",
-        command => "chmod 755 n98-magerun.phar",
+        onlyif  => "test `stat --format '%a' magerun` -ne 755",
+        command => "chmod 755 magerun",
     }
 
 }
