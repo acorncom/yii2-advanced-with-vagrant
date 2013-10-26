@@ -8,8 +8,8 @@ Vagrant.configure("2") do |config|
   config.vm.box_url = "http://boxes.monsieurbiz.com/debian-wheezy.box"
 
   # Port forwarding
-  config.vm.network :forwarded_port, guest: 80, host: 8080
-  config.vm.network :forwarded_port, guest: 1080, host: 1080
+  config.vm.network :forwarded_port, guest: 80, host: 8080, auto_correct: true
+  config.vm.network :forwarded_port, guest: 1080, host: 1080, auto_correct: true
 
   # Network
   config.vm.network :private_network, ip: "10.0.0.2"
@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--cpus", "2"]
     vb.customize ["modifyvm", :id, "--ioapic", "on"]
   end
-  
+
   # Puppet!
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path   = "puppet/manifests"
