@@ -1,4 +1,4 @@
-class mysql::install ( $root_password, $db_name, $db_user, $db_password ) {
+class mysql::install ( $root_password, $db_name, $db_user, $db_password, $db_name_tests ) {
 
     # MySQL server & client
     package { "mysql-server":
@@ -52,6 +52,7 @@ class mysql::install ( $root_password, $db_name, $db_user, $db_password ) {
         notify  => Exec['import database'],
     }
 
+    # Import the database dump if it exists
     exec { "import database":
         refreshonly => true,
         cwd         => "/vagrant",
@@ -59,12 +60,19 @@ class mysql::install ( $root_password, $db_name, $db_user, $db_password ) {
         command     => "gunzip -c database.sql.gz | mysql -uroot -p${root_password} ${db_name}",
     }
 
+    # Create the magento test database
+    exec { "create-magento-test-db":
+        path    => "/usr/bin",
+        onlyif  => "test ! `mysql -uroot -p${root_password} -e 'use ${db_name_tests}' && echo $?`",
+        command => "mysqladmin -uroot -p${root_password} create ${db_name_tests}",
+        require => Exec["create-magento-db"],
+    }
+
     # Create the magento user
     exec { "create-magento-user":
         path    => "/usr/bin",
         onlyif  => "test ! `mysql -u${db_user} -p${db_password} -e 'use ${db_name}' && echo $?`",
         command => "mysql -uroot -p${root_password} -e \"GRANT ALL ON *.* TO '${db_user}'@'localhost' IDENTIFIED BY '${db_password}' WITH GRANT OPTION;\"",
-        require => Exec["create-magento-db"],
+        require => [ Exec["create-magento-db"], Exec["create-magento-test-db"] ],
     }
-
 }

@@ -38,6 +38,7 @@ Vagrant.configure("2") do |config|
         "db_user"           => "magento",
         "db_password"       => "magento",
         "db_name"           => "magento",
+        "db_name_tests"     => "magento_tests",
         "document_root"     => "/var/www/magento",
         "logs_dir"          => "/var/www/logs",
     }
