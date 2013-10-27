@@ -5,5 +5,6 @@ class tools {
     include tools::composer
     include tools::magerun
     include tools::casperjs
+    include tools::phpunit
 
 }
