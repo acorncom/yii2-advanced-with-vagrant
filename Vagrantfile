@@ -33,7 +33,7 @@ Vagrant.configure("2") do |config|
     # Factors
     puppet.facter = {
         "vagrant"           => "1",
-        "hostname"          => "super-cool.com",
+        "hostname"          => "vagrant-mage.dev",
         "db_root_password"  => "mysql",
         "db_user"           => "magento",
         "db_password"       => "magento",
