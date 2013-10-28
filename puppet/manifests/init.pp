@@ -30,6 +30,7 @@ class { "mysql":
     db_name         => "${db_name}",
     db_user         => "${db_user}",
     db_password     => "${db_password}",
+    db_name_tests   => "${db_name_tests}",
 }
 
 # PHP
