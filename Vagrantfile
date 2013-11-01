@@ -13,6 +13,12 @@ Vagrant.configure("2") do |config|
 
   # Network
   config.vm.network :private_network, ip: "10.0.0.2"
+  config.hostmanager.enabled            = true
+  config.hostmanager.manage_host        = true
+  config.hostmanager.ignore_private_ip  = false
+  config.hostmanager.include_offline    = true
+  config.vm.hostname                    = "my-website.dev"
+  config.hostmanager.aliases            = %w(my-website)
 
   # Synced folders
   config.vm.synced_folder "htdocs", "/var/www/magento", :nfs => true
@@ -23,6 +29,9 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--cpus", "2"]
     vb.customize ["modifyvm", :id, "--ioapic", "on"]
   end
+
+  # "Provision" with hostmanager
+  config.vm.provision :hostmanager
 
   # Puppet!
   config.vm.provision :puppet do |puppet|
