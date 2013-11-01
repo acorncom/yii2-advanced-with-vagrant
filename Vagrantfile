@@ -25,9 +25,7 @@ Vagrant.configure("2") do |config|
 
   # Virtualbox customization
   config.vm.provider :virtualbox do |vb|
-    vb.customize ["modifyvm", :id, "--memory", "2048"]
-    vb.customize ["modifyvm", :id, "--cpus", "2"]
-    vb.customize ["modifyvm", :id, "--ioapic", "on"]
+    vb.customize ["modifyvm", :id, "--memory", "1024", "--cpus", "2", "--pae", "on", "--hwvirtex", "on", "--ioapic", "on"]
   end
 
   # "Provision" with hostmanager
