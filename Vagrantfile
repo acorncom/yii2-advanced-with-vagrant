@@ -21,7 +21,9 @@ Vagrant.configure("2") do |config|
   config.hostmanager.aliases            = %w(my-website)
 
   # Synced folders
-  config.vm.synced_folder "htdocs", "/var/www/magento", :nfs => true
+  config.vm.synced_folder "htdocs", "/var/www/magento", nfs: true,
+                                    mount_options: ["nolock", "async"],
+                                    bsd__nfs_options: ["alldirs","async","nolock"]
 
   # Virtualbox customization
   config.vm.provider :virtualbox do |vb|
