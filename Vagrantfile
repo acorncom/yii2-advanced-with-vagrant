@@ -17,8 +17,8 @@ Vagrant.configure("2") do |config|
   config.hostmanager.manage_host        = true
   config.hostmanager.ignore_private_ip  = false
   config.hostmanager.include_offline    = true
-  config.vm.hostname                    = "my-website.dev"
-  config.hostmanager.aliases            = %w(my-website)
+  config.vm.hostname                    = "vagrant-mage.dev"
+  config.hostmanager.aliases            = %w(vagrant-mage)
 
   # Synced folders
   config.vm.synced_folder "htdocs", "/var/www/magento", nfs: true,
