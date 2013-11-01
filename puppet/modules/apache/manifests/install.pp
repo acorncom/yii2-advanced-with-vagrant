@@ -51,7 +51,6 @@ class apache::install ( $server_name, $document_root, $logs_dir ) {
     # Set the host in local loop
     host { "magento":
         ensure  => present,
-        ip      => "127.0.0.1",
         name    => $server_name,
     }
 
