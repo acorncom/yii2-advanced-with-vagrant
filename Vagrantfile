@@ -9,6 +9,7 @@ Vagrant.configure("2") do |config|
 
   # Port forwarding
   config.vm.network :forwarded_port, guest: 1080, host: 1080, auto_correct: true
+  config.vm.network :forwarded_port, guest: 9000, host: 9090, auto_correct: true
 
   # Network
   config.vm.network :private_network, ip: "10.0.0.2"
