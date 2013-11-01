@@ -8,7 +8,6 @@ Vagrant.configure("2") do |config|
   config.vm.box_url = "http://boxes.monsieurbiz.com/debian-wheezy.box"
 
   # Port forwarding
-  config.vm.network :forwarded_port, guest: 80, host: 8080, auto_correct: true
   config.vm.network :forwarded_port, guest: 1080, host: 1080, auto_correct: true
 
   # Network
