@@ -15,6 +15,14 @@ class php () {
         group  => "root",
     }
 
+    -> file { "/etc/php5/mods-available/xdebug.ini":
+        ensure => file,
+        source => "puppet:///modules/php/xdebug.ini",
+        notify => Service['apache2'],
+        owner  => "root",
+        group  => "root",
+    }
+
     # Install modules
     $modules = [
         "php5-cli",
@@ -26,6 +34,7 @@ class php () {
         "php5-mcrypt",
         "php5-tidy",
         "php5-readline",
+        "php5-xdebug",
     ]
     package { $modules :
         ensure  => latest,
