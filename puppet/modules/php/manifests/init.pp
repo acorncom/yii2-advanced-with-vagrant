@@ -41,4 +41,10 @@ class php () {
         require => [ Package['php5'], Class['server'], Package['apache2'], Package['mysql-server'] ],
     }
 
+    # APC
+    package { 'php-apc':
+        ensure  => latest,
+        require => Package['php5'],
+    }
+
 }
