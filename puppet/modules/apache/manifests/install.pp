@@ -24,6 +24,23 @@ class apache::install ( $server_name, $document_root, $logs_dir ) {
         command => 'chsh -s /bin/bash www-data'
     }
 
+    # Generate certificates
+    -> file { "/etc/apache2/ssl":
+        ensure => directory,
+    }
+    -> exec { "key file certificate":
+        command => "openssl genrsa -out ${server::hostname}.key 2048",
+        cwd     => "/etc/apache2/ssl",
+        creates => "/etc/apache2/ssl/${server::hostname}.key",
+        notify  => Class['apache::service'],
+    }
+    -> exec { "cert file certificate":
+        command => "openssl req -new -x509 -key ${server::hostname}.key -out ${server::hostname}.cert -days 3650 -subj /CN=${server::hostname}",
+        cwd     => "/etc/apache2/ssl",
+        creates => "/etc/apache2/ssl/${server::hostname}.cert",
+        notify  => Class['apache::service'],
+    }
+
     # The virtualhost file
     -> file { "site-magento":
         path    => "/etc/apache2/sites-available/magento",
