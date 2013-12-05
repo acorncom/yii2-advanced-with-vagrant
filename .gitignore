@@ -3,15 +3,8 @@
 
 *.~
 1
+*.swp
 
-# Magento
-/htdocs/downloader
-/htdocs/app/etc/local.xml
-/htdocs/var/log
-/htdocs/var/cache
-/htdocs/var/locks
-/htdocs/var/session
-/htdocs/var/package
-/htdocs/media/catalog
-
-/htdocs/.modman
+# Ignore htdocs
+/htdocs/*
+!/htdocs/.placeholder
