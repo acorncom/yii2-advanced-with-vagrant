@@ -13,7 +13,7 @@ class tools::installer {
     -> file { "link installer bin":
         ensure  => link,
         path    => $binary,
-        target  => "$repo_path/bin/installer",
+        target  => "$repo_path/bin/Installer",
     }
 
     exec { "pull jacquesbh/installer":
