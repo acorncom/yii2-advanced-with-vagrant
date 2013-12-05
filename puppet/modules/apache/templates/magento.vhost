@@ -1,14 +1,14 @@
 <VirtualHost *:80>
 
-    ServerName <%= server_name %>
+    ServerName <%= @server_name %>
 
-    DocumentRoot <%= document_root %>
+    DocumentRoot <%= @document_root %>
 
-    ErrorLog <%= logs_dir %>/apache-error.log
-    CustomLog <%= logs_dir %>/apache-access.log common
+    ErrorLog <%= @logs_dir %>/apache-error.log
+    CustomLog <%= @logs_dir %>/apache-access.log common
     #php_value error_log /path/php.log
 
-    <Directory <%= document_root %>>
+    <Directory <%= @document_root %>>
         Order allow,deny
         Allow from all
         AllowOverride All
@@ -23,20 +23,20 @@
 
 <VirtualHost *:443>
 
-    ServerName <%= server_name %>
+    ServerName <%= @server_name %>
 
     SSLEngine on
-    SSLCertificateKeyFile /etc/apache2/ssl/<%= server_name %>.key
-    SSLCertificateFile /etc/apache2/ssl/<%= server_name %>.cert
+    SSLCertificateKeyFile /etc/apache2/ssl/<%= @server_name %>.key
+    SSLCertificateFile /etc/apache2/ssl/<%= @server_name %>.cert
     SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
 
-    DocumentRoot <%= document_root %>
+    DocumentRoot <%= @document_root %>
 
-    ErrorLog <%= logs_dir %>/apache-error.log
-    CustomLog <%= logs_dir %>/apache-access.log common
+    ErrorLog <%= @logs_dir %>/apache-error.log
+    CustomLog <%= @logs_dir %>/apache-access.log common
     #php_value error_log /path/php.log
 
-    <Directory <%= document_root %>>
+    <Directory <%= @document_root %>>
         Order allow,deny
         Allow from all
         AllowOverride All
