@@ -42,9 +42,9 @@ class php () {
     }
 
     # APC
-    package { 'php-apc':
-        ensure  => latest,
-        require => Package['php5'],
-    }
+    # package { 'php-apc':
+    #     ensure  => latest,
+    #     require => Package['php5'],
+    # }
 
 }
