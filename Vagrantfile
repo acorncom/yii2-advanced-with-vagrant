@@ -32,6 +32,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # Network
+  # config.vm.network :private_network, ip: "10.0.0.232"
   config.hostmanager.enabled            = true
   config.hostmanager.manage_host        = true
   config.hostmanager.ignore_private_ip  = false
