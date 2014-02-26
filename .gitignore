@@ -8,3 +8,4 @@
 # Ignore htdocs
 /htdocs/*
 !/htdocs/.placeholder
+.idea
