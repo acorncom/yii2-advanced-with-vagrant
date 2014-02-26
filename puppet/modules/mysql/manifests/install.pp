@@ -43,8 +43,8 @@ class mysql::install ( $root_password, $db_name, $db_user, $db_password, $db_nam
         content => template("mysql/.my.cnf"),
     }
 
-    # Create the magento database
-    exec { "create-magento-db":
+    # Create the Yii2 database
+    exec { "create-yii-db":
         path    => "/usr/bin",
         onlyif  => "test ! `mysql -uroot -p${root_password} -e 'use ${db_name}' && echo $?`",
         command => "mysqladmin -uroot -p${root_password} create ${db_name}",
@@ -60,19 +60,19 @@ class mysql::install ( $root_password, $db_name, $db_user, $db_password, $db_nam
         command     => "gunzip -c database.sql.gz | mysql -uroot -p${root_password} ${db_name}",
     }
 
-    # Create the magento test database
-    exec { "create-magento-test-db":
+    # Create the Yii2 test database
+    exec { "create-yii-test-db":
         path    => "/usr/bin",
         onlyif  => "test ! `mysql -uroot -p${root_password} -e 'use ${db_name_tests}' && echo $?`",
         command => "mysqladmin -uroot -p${root_password} create ${db_name_tests}",
-        require => Exec["create-magento-db"],
+        require => Exec["create-yii-db"],
     }
 
-    # Create the magento user
-    exec { "create-magento-user":
+    # Create the Yii2 user
+    exec { "create-yii2-user":
         path    => "/usr/bin",
         onlyif  => "test ! `mysql -u${db_user} -p${db_password} -e 'use ${db_name}' && echo $?`",
         command => "mysql -uroot -p${root_password} -e \"GRANT ALL ON *.* TO '${db_user}'@'localhost' IDENTIFIED BY '${db_password}' WITH GRANT OPTION;\"",
-        require => [ Exec["create-magento-db"], Exec["create-magento-test-db"] ],
+        require => [ Exec["create-yii-db"], Exec["create-yii-test-db"] ],
     }
 }

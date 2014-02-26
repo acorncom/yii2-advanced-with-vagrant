@@ -42,10 +42,10 @@ class apache::install ( $server_name, $document_root, $logs_dir ) {
     }
 
     # The virtualhost file
-    -> file { "site-magento":
-        path    => "/etc/apache2/sites-available/magento",
+    -> file { "site-yii2":
+        path    => "/etc/apache2/sites-available/yii2",
         ensure  => present,
-        content => template("apache/magento.vhost"),
+        content => template("apache/yii2.vhost"),
         notify  => Class['apache::service'],
     }
 
@@ -59,14 +59,14 @@ class apache::install ( $server_name, $document_root, $logs_dir ) {
 
     # Enable the virtualhost
     exec { "Enable the virtualhost":
-        command => "a2ensite magento",
-        creates => "/etc/apache2/sites-enabled/magento",
-        require => [ Package['apache2'], File['site-magento'] ],
+        command => "a2ensite yii2",
+        creates => "/etc/apache2/sites-enabled/yii2",
+        require => [ Package['apache2'], File['site-yii2'] ],
         notify  => Class['apache::service'],
     }
 
     # Set the host in local loop
-    host { "magento":
+    host { "yii2":
         ensure  => present,
         name    => $server_name,
     }

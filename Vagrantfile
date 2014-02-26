@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-hostname = "vagrant-mage.dev"
+hostname = "www.yii2.dev"
 
 VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -40,7 +40,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.hostname                    = hostname
 
   # Synced folders
-  config.vm.synced_folder "htdocs", "/var/www/magento"
+  config.vm.synced_folder "www", "/var/www"
   # config.vm.synced_folder "htdocs", "/var/www/magento", nfs: true,
   #                                   mount_options: ["nolock", "async"],
   #                                   bsd__nfs_options: ["alldirs","async","nolock"]
@@ -59,11 +59,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "vagrant"           => "1",
         "hostname"          => hostname,
         "db_root_password"  => "mysql",
-        "db_user"           => "magento",
-        "db_password"       => "magento",
-        "db_name"           => "magento",
+        "db_user"           => "yii2",
+        "db_password"       => "yii2",
+        "db_name"           => "yii2",
         "db_name_tests"     => "magento_tests",
-        "document_root"     => "/var/www/magento",
+        "document_root"     => "/var/www/data",
         "logs_dir"          => "/var/www/logs",
     }
   end

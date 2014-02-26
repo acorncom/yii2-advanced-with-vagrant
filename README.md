@@ -1,4 +1,4 @@
-# Vagrantfile & Puppet manifests for Magento
+# Vagrantfile & Puppet manifests for Yii2
 
 ## Requirements
 
@@ -8,7 +8,7 @@ You just need [Vagrant][vagrant] :)
 
 Edit the `Vagrantfile`: `vim Vagrantfile`
 
-*   Change the VM IP if needed. Default is: `10.0.0.2` (`10.0.0.1` is your machine)
+*   Change the VM IP if needed. Default is: `10.0.0.232` (`10.0.0.1` is your machine)
 *   Change the RAM or number of CPUs if needed.
 *   On the puppet part: change the factors
     *   Change `hostname` with the development domain of your website
@@ -17,7 +17,7 @@ Edit the `Vagrantfile`: `vim Vagrantfile`
 
 Then `up` the VM: `vagrant up`
 
-Now you can access to your Magento : `http://your-domain.org:8080`
+Now you can access to your Yii setup : `http://your-domain.org:8080`
 
 If you want do remove the port `8080` and access to your website via `http://your-domain.org/` , you can do it with `ipfw`.  
 Example : `ipfw add 100 fwd 127.0.0.1,8080 tcp from any to me 80` as root  
@@ -31,14 +31,14 @@ With the information below you can connect to the MySQL server running on the vi
 
 ## Default information
 
-* SSH Host: 10.0.0.2
+* SSH Host: 10.0.0.232
 * SSH User: vagrant
 * SSH Pass: vagrant
 * SSH Port: 2222 (default by vagrant)
 * MySQL Host: 127.0.0.1
 * MySQL Port: 3306
-* MySQL User: magento
-* MySQL Pass: magento
+* MySQL User: yii2
+* MySQL Pass: yii2
 
 ### Import database
 
@@ -70,7 +70,7 @@ If you need to stop the mailcatcher daemon : Clic on "Quit" on the top right cor
 
 Are installed:
 
-* apache-mpm-itk (with magento virtualhost)
+* apache-mpm-itk (with yii2 virtualhost)
 * mysql-server (with custom my.cnf)
 * mysql-client
 * php5 (and some modules)
@@ -82,15 +82,5 @@ Are installed:
 * composer.phar
 * mailcatcher (gem)
 
-### For Magento developers
-
-* [n98-magerun.phar][magerun]
-* [modman][modman]
-* [The Installer][installer]
-
-
 [vagrant]: http://vagrantup.com
-[installer]: https://github.com/jacquesbh/Installer#readme
-[modman]: https://github.com/colinmollenhour/modman
-[magerun]: https://github.com/netz98/n98-magerun
 [mailcatcher]: http://mailcatcher.me
