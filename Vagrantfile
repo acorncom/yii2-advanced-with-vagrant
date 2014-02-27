@@ -32,12 +32,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # Network
-  # config.vm.network :private_network, ip: "10.0.0.232"
+  config.vm.network :private_network, ip: "192.168.200.20"
+  config.vm.hostname                    = hostname
+
   config.hostmanager.enabled            = true
   config.hostmanager.manage_host        = true
   config.hostmanager.ignore_private_ip  = false
   config.hostmanager.include_offline    = true
-  config.vm.hostname                    = hostname
 
   # Synced folders
   config.vm.synced_folder "www", "/var/www"
@@ -63,7 +64,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "db_password"       => "yii2",
         "db_name"           => "yii2",
         "db_name_tests"     => "magento_tests",
-        "document_root"     => "/var/www/data",
+        "document_root"     => "/var/www/frontend/web",
         "logs_dir"          => "/var/www/logs",
     }
   end

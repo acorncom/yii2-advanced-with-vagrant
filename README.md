@@ -2,13 +2,17 @@
 
 ## Requirements
 
-You just need [Vagrant][vagrant] :)
+You just need [Vagrant][vagrant] and vagrant-hostmanager
+
+Install vagrant-hostmanager as follows:
+
+    vagrant plugin install vagrant-hostmanager
 
 ## How start
 
 Edit the `Vagrantfile`: `vim Vagrantfile`
 
-*   Change the VM IP if needed. Default is: `10.0.0.232` (`10.0.0.1` is your machine)
+*   Change the VM IP if needed. Default is: `192.168.200.20` (`192.168.200.1` is your machine)
 *   Change the RAM or number of CPUs if needed.
 *   On the puppet part: change the factors
     *   Change `hostname` with the development domain of your website
@@ -17,11 +21,7 @@ Edit the `Vagrantfile`: `vim Vagrantfile`
 
 Then `up` the VM: `vagrant up`
 
-Now you can access to your Yii setup : `http://your-domain.org:8080`
-
-If you want do remove the port `8080` and access to your website via `http://your-domain.org/` , you can do it with `ipfw`.  
-Example : `ipfw add 100 fwd 127.0.0.1,8080 tcp from any to me 80` as root  
-*`ipfw` isn't possible on Windows (but Windows sucks right?)*
+Now you can access to your Yii setup : `http://www.yii2.dev`
 
 ## MySQL
 
@@ -31,7 +31,7 @@ With the information below you can connect to the MySQL server running on the vi
 
 ## Default information
 
-* SSH Host: 10.0.0.232
+* SSH Host: 192.168.200.20
 * SSH User: vagrant
 * SSH Pass: vagrant
 * SSH Port: 2222 (default by vagrant)
@@ -46,7 +46,7 @@ If file exists `database.sql.gz` in the main directory (where the Vagrantfile is
 
 ## Virtualhost
 
-Per default the variable `MAGE_IS_DEVELOPER_MODE` is set to true.
+Per default the variable `YII_DEBUG` is set to true for this Apache setup, but will be false automatically on deploy.
 
 The virtualhost is set on the `htdocs` directory.
 
@@ -62,7 +62,7 @@ If mailcatcher is started: **all emails are catched**.
 
 If you want to start MailCatcher, simply run this command (with vagrant user) : `mailcatcher --ip 0.0.0.0`
 
-Then go to : http://localhost:1080
+Then go to : http://www.yii2.dev:1080
 
 If you need to stop the mailcatcher daemon : Clic on "Quit" on the top right corner of the MailCatcher Web UI.
 
