@@ -133,3 +133,9 @@ Are installed:
 
 [vagrant]: http://vagrantup.com
 [mailcatcher]: http://mailcatcher.me
+
+## Credit
+Giving credit where credit is due.  Almost all of the hard work on this was done here:
+https://github.com/monsieurbiz/vagrant-magento
+
+I just forked and tweaked it to work well with Yii 2
