@@ -73,7 +73,56 @@ Are installed:
 * apache-mpm-itk (with yii2 virtualhost)
 * mysql-server (with custom my.cnf)
 * mysql-client
-* php5 (and some modules)
+* php5 (and the following modules)
+    - bcmatch
+    - bz2
+    - calendar
+    - ctype
+    - curl
+    - date
+    - dba
+    - dom
+    - ereg
+    - exif
+    - fileinfo
+    - filter
+    - ftp
+    - gd
+    - gettext
+    - hash
+    - iconv
+    - intl
+    - json
+    - libxml
+    - mbstring
+    - mcrypt
+    - mhash
+    - mysql
+    - mysqli
+    - openssl
+    - pcre
+    - pdo
+    - pdo_mysql
+    - phar
+    - posix
+    - readline
+    - reflection
+    - session
+    - shmop
+    - simplexml
+    - soap
+    - sockets
+    - spl
+    - sysvmsg
+    - tidy
+    - tokenizer
+    - wddx
+    - xdebug
+    - xml
+    - xmlreader
+    - xmlwriter
+    - zip
+    - zlib
 * screen (with custom .screenrc for root)
 * vim
 * wget
