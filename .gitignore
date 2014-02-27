@@ -9,3 +9,5 @@
 /htdocs/*
 !/htdocs/.placeholder
 .idea
+
+www/logs
