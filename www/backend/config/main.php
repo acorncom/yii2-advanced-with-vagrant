@@ -13,6 +13,10 @@ return [
 	'controllerNamespace' => 'backend\controllers',
 	'modules' => [],
 	'components' => [
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName'  => false,
+        ],
 		'user' => [
 			'identityClass' => 'common\models\User',
 			'enableAutoLogin' => true,

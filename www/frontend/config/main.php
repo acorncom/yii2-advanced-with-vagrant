@@ -11,6 +11,10 @@ return [
 	'basePath' => dirname(__DIR__),
 	'controllerNamespace' => 'frontend\controllers',
 	'components' => [
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName'  => false,
+        ],
 		'user' => [
 			'identityClass' => 'common\models\User',
 			'enableAutoLogin' => true,
