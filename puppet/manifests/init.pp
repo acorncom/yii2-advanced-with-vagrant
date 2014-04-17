@@ -1,4 +1,4 @@
-# Init puppet provisioner for Magento installation
+# Init puppet provisioner for installation
 
 Exec {
     path => [
@@ -21,7 +21,8 @@ class { "server":
 class { "apache":
     server_name     => "${server::hostname}",
     document_root   => "${document_root}",
-    logs_dir        => "${logs_dir}"
+    logs_dir        => "${logs_dir}",
+    document_root_backend   => "${document_root_backend}",
 }
 
 # MySQL

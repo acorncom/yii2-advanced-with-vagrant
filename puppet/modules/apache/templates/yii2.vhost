@@ -15,6 +15,13 @@
         Options all
     </Directory>
 
+    <Directory <%= @document_root_backend %>>
+        Order allow,deny
+        Allow from all
+        AllowOverride All
+        Options all
+    </Directory>
+
     SetEnv YII_DEBUG 1
     SetEnv YII_ENV dev
 
@@ -38,6 +45,13 @@
     #php_value error_log /path/php.log
 
     <Directory <%= @document_root %>>
+        Order allow,deny
+        Allow from all
+        AllowOverride All
+        Options all
+    </Directory>
+
+    <Directory <%= @document_root_backend %>>
         Order allow,deny
         Allow from all
         AllowOverride All

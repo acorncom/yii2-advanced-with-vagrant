@@ -69,6 +69,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "db_name"           => "yii2",
         "db_name_tests"     => "yii2_tests",
         "document_root"     => "/var/www/frontend/web",
+        "document_root_backend"     => "/var/www/backend/web",
         "logs_dir"          => "/var/www/logs",
     }
   end
