@@ -9,7 +9,15 @@ class php () {
 
     -> file { "/etc/php5/apache2/php.ini":
         ensure => file,
-        source => "puppet:///modules/php/php.ini",
+        source => "puppet:///modules/php/apache/php.ini",
+        notify => Service['apache2'],
+        owner  => "root",
+        group  => "root",
+    }
+
+    -> file { "/etc/php5/cli/php.ini":
+        ensure => file,
+        source => "puppet:///modules/php/cli/php.ini",
         notify => Service['apache2'],
         owner  => "root",
         group  => "root",
