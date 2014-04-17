@@ -3,7 +3,7 @@ class mysql::install ( $root_password, $db_name, $db_user, $db_password, $db_nam
     # MySQL server & client
     package { "mysql-server":
         ensure  => latest,
-        require => [ Class['server'], File['/etc/mysql/my.cnf'] ],
+        require => [ Class['server'] ],
         notify  => Service['mysql'],
     }
 
@@ -13,14 +13,6 @@ class mysql::install ( $root_password, $db_name, $db_user, $db_password, $db_nam
 
     file { "/etc/mysql":
         ensure => directory,
-    }
-
-    -> file { "/etc/mysql/my.cnf":
-        ensure => file,
-        source => "puppet:///modules/mysql/my.cnf",
-        owner  => "root",
-        group  => "root",
-        notify => Service['mysql'],
     }
 
     # Stop mysql

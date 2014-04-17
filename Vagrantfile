@@ -1,5 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+# Some info on how to adjust this file: http://garylarizza.com/blog/2013/02/01/repeatable-puppet-development-with-vagrant/
 
 hostname = "www.yii2.dev"
 
@@ -10,8 +11,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :vmware_fusion do |vmware, override|
 
     # Which box?
-    override.vm.box = "debian-wheezy-fusion"
-    override.vm.box_url = "http://boxes.monsieurbiz.com/debian-wheezy-fusion.box"
+    override.vm.box = "opscode-ubuntu-13.04-x64-vmware"
+    override.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/vmware/opscode_ubuntu-13.04_chef-provisionerless.box"
 
     # Customize VM
     vmware.vmx["memsize"] = "1024"
@@ -22,9 +23,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Virtualbox customization
   config.vm.provider :virtualbox do |virtualbox, override|
 
-    # Which box?
-    override.vm.box = "debian-wheezy"
-    override.vm.box_url = "http://boxes.monsieurbiz.com/debian-wheezy.box"
+    # Which box? http://opscode.github.io/bento/
+    override.vm.box = "opscode-ubuntu-13.04-x64"
+    override.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-13.04_chef-provisionerless.box"
 
     # Customize VM
     virtualbox.customize ["modifyvm", :id, "--memory", "1024", "--cpus", "1", "--pae", "on", "--hwvirtex", "on", "--ioapic", "on"]
@@ -49,6 +50,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # "Provision" with hostmanager
   config.vm.provision :hostmanager
 
+  # Next, we have to get puppet onto our machine
+  config.vm.provision :shell, :path => "ubuntu.sh"
+
   # Puppet!
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path   = "puppet/manifests"
@@ -63,7 +67,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "db_user"           => "yii2",
         "db_password"       => "yii2",
         "db_name"           => "yii2",
-        "db_name_tests"     => "magento_tests",
+        "db_name_tests"     => "yii2_tests",
         "document_root"     => "/var/www/frontend/web",
         "logs_dir"          => "/var/www/logs",
     }
