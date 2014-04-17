@@ -14,11 +14,17 @@ require(__DIR__ . '/../../vendor/autoload.php');
 require(__DIR__ . '/../../vendor/yiisoft/yii2/Yii.php');
 require(__DIR__ . '/../../common/config/aliases.php');
 
+$commonMainLocalPath = __DIR__ . '/../../common/config/main-local.php';
+$commonMainLocal = (file_exists($commonMainLocalPath)) ? require($commonMainLocalPath) : array();
+
+$mainLocalPath = __DIR__ . '/../config/main-local.php';
+$mainLocal = (file_exists($mainLocalPath)) ? require($mainLocalPath) : array();
+
 $config = yii\helpers\ArrayHelper::merge(
     require(__DIR__ . '/../../common/config/main.php'),
-    require(__DIR__ . '/../../common/config/main-local.php'),
+    $commonMainLocal,
     require(__DIR__ . '/../config/main.php'),
-    require(__DIR__ . '/../config/main-local.php')
+    $mainLocal
 );
 
 $application = new yii\web\Application($config);
