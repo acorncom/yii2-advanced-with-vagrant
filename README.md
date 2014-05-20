@@ -2,7 +2,7 @@
 
 ## Requirements
 
-You just need [Vagrant][vagrant] and vagrant-hostmanager
+You just need [Vagrant][vagrant], [VirtualBox][VirtualBox] and vagrant-hostmanager
 
 Install vagrant-hostmanager as follows:
 
@@ -132,6 +132,7 @@ Are installed:
 * mailcatcher (gem)
 
 [vagrant]: http://vagrantup.com
+[VirtualBox]: https://www.virtualbox.org
 [mailcatcher]: http://mailcatcher.me
 
 ## Credit
